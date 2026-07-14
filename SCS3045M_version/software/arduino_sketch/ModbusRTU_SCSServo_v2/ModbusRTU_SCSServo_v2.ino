@@ -6,7 +6,7 @@
 // In tuning mode, Serial (USB) is used for debug output instead of Modbus.
 // Disconnect the RS485 module when using tuning mode.
 //
-// #define TUNING_MODE
+#define TUNING_MODE
 
 #ifndef TUNING_MODE
 #include <ModbusRTU.h>
@@ -14,13 +14,13 @@
 
 // ========================== TUNABLE PARAMETERS ==============================
 
-#define SERVO_ID         1        // Zhonglin servo ID (factory default is usually 0 or 1)
+#define SERVO_ID         0        // Zhonglin servo ID (factory default is usually 0 or 1)
 #define SERVO_BAUDRATE   115200
 
 // Gripper open/close positions in PWM units (500–2500, maps to 0–270 deg).
 // Use TUNING_MODE to discover the correct values for your setup.
-#define GRIPPER_OPEN_POS   2200
-#define GRIPPER_CLOSE_POS  200
+#define GRIPPER_OPEN_POS   839
+#define GRIPPER_CLOSE_POS  1918
 
 #define SERVO_MOVE_TIME  500      // milliseconds for each move command
 #define SERVO_CMD_DELAY  10       // ms delay after sending a command
@@ -28,8 +28,8 @@
 // ========================== PIN DEFINITIONS =================================
 
 // Zhonglin servo via FE-URT module (UART2 remapped)
-#define TX_SERVO  12   // ESP32 GPIO12 -> FE-URT RX
-#define RX_SERVO  13   // ESP32 GPIO13 -> FE-URT TX
+#define TX_SERVO  27   // ESP32 GPIO27 -> FE-URT TX
+#define RX_SERVO  14   // ESP32 GPIO14 -> FE-URT RX
 
 // Modbus RTU via RS485-to-TTL module (UART0 — shares pins with USB bridge)
 // TX0 = GPIO1, RX0 = GPIO3 (default Serial pins)
@@ -196,7 +196,7 @@ void setup() {
   Serial.println("  k  - set power-on mode to LOCK (persistent)");
   Serial.println("  m  - save current pos as MIN limit (persistent)");
   Serial.println("  x  - save current pos as MAX limit (persistent)");
-  Serial.println("  c  - move to center (PWM 1500)");
+  Serial.println("  c  - move to center (PWM 1378)");
   Serial.println("  o  - move to GRIPPER_OPEN_POS");
   Serial.println("  p  - move to GRIPPER_CLOSE_POS");
   Serial.println("  t  - read temperature and voltage");
@@ -276,8 +276,8 @@ void loop() {
       case 'c':
         zhonglin_restore(SERVO_ID);
         torque_active = true;
-        zhonglin_move(SERVO_ID, 1500, 1000);
-        Serial.println(">> Moving to center (PWM=1500)");
+        zhonglin_move(SERVO_ID, 1378, 1000);
+        Serial.println(">> Moving to center (PWM=1378)");
         break;
       case 'o':
         zhonglin_restore(SERVO_ID);
