@@ -19,8 +19,8 @@
 
 // Gripper open/close positions in PWM units (500–2500, maps to 0–270 deg).
 // Use TUNING_MODE to discover the correct values for your setup.
-#define GRIPPER_OPEN_POS   839
-#define GRIPPER_CLOSE_POS  1918
+#define GRIPPER_OPEN_POS   830
+#define GRIPPER_CLOSE_POS  1900
 
 #define SERVO_MOVE_TIME  500      // milliseconds for each move command
 #define SERVO_CMD_DELAY  10       // ms delay after sending a command
